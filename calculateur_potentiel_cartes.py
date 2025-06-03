@@ -65,3 +65,41 @@ with col2:
         """,
         unsafe_allow_html=True
     )
+st.markdown("---")
+st.subheader("📂 Calcul automatique à partir d'un fichier CSV")
+
+uploaded_file = st.file_uploader("Importer un fichier CSV avec les colonnes : Commune, Population, Entreprises, Agents, Seniors, Commerces", type=["csv"])
+
+if uploaded_file is not None:
+    import pandas as pd
+
+    df = pd.read_csv(uploaded_file)
+
+    results = []
+    for _, row in df.iterrows():
+        try:
+            b2c, b2b, b2g_a, b2g_s, total, commercants = calcul_potentiel(
+                row["Population"], row["Entreprises"], row["Agents"], row["Commerces"], row["Seniors"],
+                taux_adoption_b2c, moy_b2c,
+                taux_adoption_b2b, moy_b2b,
+                taux_adoption_b2g_agents, moy_b2g,
+                taux_adoption_seniors, moy_seniors,
+                taux_adhesion_commerces, nb_cartes_par_entreprise
+            )
+            results.append({
+                "Commune": row["Commune"],
+                "💰 Potentiel B2C (€)": round(b2c, 2),
+                "🏢 Potentiel B2B (€)": round(b2b, 2),
+                "🏛️ Potentiel B2G - Agents (€)": round(b2g_a, 2),
+                "👴 Potentiel B2G - Seniors (€)": round(b2g_s, 2),
+                "🔹 Potentiel Total (€)": round(total, 2),
+                "🏪 Commerçants adhérents": round(commercants)
+            })
+        except Exception as e:
+            st.warning(f"Erreur sur la commune {row.get('Commune', 'inconnue')} : {e}")
+
+    result_df = pd.DataFrame(results)
+    st.dataframe(result_df)
+
+    csv = result_df.to_csv(index=False).encode("utf-8")
+    st.download_button("📥 Télécharger les résultats", csv, "potentiel_cartes_par_commune.csv", "text/csv")
