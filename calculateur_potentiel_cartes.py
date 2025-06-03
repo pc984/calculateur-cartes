@@ -28,17 +28,17 @@ with col1:
     seniors = st.number_input("Nombre de seniors (60 ans et +)", min_value=0, value=4000)
     commerces = st.number_input("Nombre de commerces", min_value=0, value=100)
     
-    moy_b2c = st.number_input("Montant moyen B2C (€)", min_value=0.0, value=30.0)
-    moy_b2b = st.number_input("Montant moyen B2B (€)", min_value=0.0, value=50.0)
-    nb_cartes_par_entreprise = st.number_input("Nombre moyen de cartes par entreprise", min_value=1, value=5)
+    moy_b2c = st.number_input("Montant moyen B2C (€)", min_value=0.0, value=50.0)
+    moy_b2b = st.number_input("Montant moyen B2B (€)", min_value=0.0, value=70.0)
+    nb_cartes_par_entreprise = st.number_input("Nombre moyen de cartes par entreprise", min_value=1, value=10)
     moy_b2g = st.number_input("Montant moyen B2G (€)", min_value=0.0, value=50.0)
     moy_seniors = st.number_input("Montant moyen Seniors (€)", min_value=0.0, value=50.0)
 
 with col2:
     taux_adoption_b2c = st.slider("Taux d'adoption B2C (%)", 0.0, 100.0, 2.0)
     taux_adoption_b2b = st.slider("Taux d'adoption B2B (%)", 0.0, 100.0, 5.0)
-    taux_adoption_b2g_agents = st.slider("Taux d'adoption B2G - Agents (%)", 0.0, 100.0, 50.0)
-    taux_adoption_seniors = st.slider("Taux d'adoption B2G - Seniors (%)", 0.0, 100.0, 20.0)
+    taux_adoption_b2g_agents = st.slider("Taux d'adoption B2G - Agents (%)", 0.0, 100.0, 30.0)
+    taux_adoption_seniors = st.slider("Taux d'adoption B2G - Seniors (%)", 0.0, 100.0, 10.0)
     taux_adhesion_commerces = st.slider("Taux d'adhésion des commerces (%)", 0.0, 100.0, 50.0)
 
 potentiel_b2c, potentiel_b2b, potentiel_b2g_agents, potentiel_b2g_seniors, total_potentiel, commerces_adhérents = calcul_potentiel(
