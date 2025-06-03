@@ -35,7 +35,7 @@ with col1:
     moy_seniors = st.number_input("Montant moyen Seniors (€)", min_value=0.0, value=50.0)
 
 with col2:
-    taux_adoption_b2c = st.slider("Taux d'adoption B2C (%)", 0.0, 100.0, 2.0)
+    taux_adoption_b2c = st.slider("Taux d'adoption B2C (%)", 0.0, 100.0, 3.0)
     taux_adoption_b2b = st.slider("Taux d'adoption B2B (%)", 0.0, 100.0, 5.0)
     taux_adoption_b2g_agents = st.slider("Taux d'adoption B2G - Agents (%)", 0.0, 100.0, 30.0)
     taux_adoption_seniors = st.slider("Taux d'adoption B2G - Seniors (%)", 0.0, 100.0, 10.0)
